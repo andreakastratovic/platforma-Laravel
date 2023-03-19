@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('author');
-            $table->string('releaseYear');
-            $table->string('genrename')->unique();
-            $table->timestamps();
-
+        Schema::table('books', function (Blueprint $table){
+            $table->foreignId("user_id");
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::table('books', function (Blueprint $table){
+            $table->dropForeign("user_id");
+        });
     }
 };

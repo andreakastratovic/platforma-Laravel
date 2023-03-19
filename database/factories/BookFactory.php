@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class BookFactory extends Factory
 {
+    protected $model = Book::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +18,11 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
-            //
+           'name'=>$this->faker->name(),
+           'author'=>$this->faker->author(),
+           'releaseYear'=>$this->faker->releaseYear(),
+           'user_id'=>User::factory(),
+           'genrename'=>Genre::factory(),
         ];
     }
 }

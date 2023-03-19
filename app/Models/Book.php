@@ -14,4 +14,12 @@ class Book extends Model
         'author',
         'releaseYear'
     ];
+
+    public function genre(){
+        return $this->belongsTo(Genre::class);
+    }
+
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }
