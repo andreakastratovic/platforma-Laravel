@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+
 
 use App\Http\Controllers\Controller;
 
@@ -17,9 +19,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        //$users = User::all();
+        //return $users;
+        $users=User::all();
 
-        return $users;
+        if(count($users)==0){
+            return response()->json('There is no registered users in the system!');
+        }
+        $my_users=array();
+        foreach($users as $user){
+            array_push($my_users,new UserResource($user));
+        }
+        return $my_users;
     }
 
     /**
